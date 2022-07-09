@@ -1,0 +1,17 @@
+.ranking-section {
+
+    .ranking-title {
+        display: block;
+        font-size: 20px;
+        margin-top: 10px;
+    }
+
+    .ranking {
+        display: flex;
+        flex-direction: column;
+
+        .user {
+            padding-top: 5px;
+        }
+    }
+}

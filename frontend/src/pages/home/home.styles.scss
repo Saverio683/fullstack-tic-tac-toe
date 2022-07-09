@@ -1,0 +1,23 @@
+.home-container {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 150px;
+
+    .button-container {        
+        display: flex;
+        justify-content: center;
+
+        .wrapper {
+            display: flex;
+            flex-direction: column;
+
+            button {
+                font-size: 30px;
+                border-radius: 0px;
+                padding: 10px;
+                margin: 10px;
+                cursor: pointer;
+            }
+        }        
+    }
+}

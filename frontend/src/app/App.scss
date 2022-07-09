@@ -1,0 +1,11 @@
+.app {
+    margin: 0;
+    padding: 0;
+
+    .title {
+        display: flex;
+        justify-content: center;
+        margin: 30px;
+        font-size: 48px;
+    }
+}

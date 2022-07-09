@@ -1,0 +1,39 @@
+$border-style: 1px solid #000000;
+$cell-size: 150px;
+
+.cell {
+    width: $cell-size;
+    height: $cell-size;    
+    font-size: 30px;
+    border: none;
+    background-color: inherit;
+
+    &:hover {
+        background-color: lightgray;
+        cursor: pointer;
+    }
+
+    &.b {
+        border-left: $border-style;
+        border-right: $border-style;
+    }
+
+    &.d {
+        border-bottom: $border-style;
+        border-top: $border-style;
+    }  
+
+    &.e {
+        border: $border-style;
+    }
+
+    &.f {
+        border-bottom: $border-style;
+        border-top: $border-style;
+    }
+    
+    &.h {
+        border-left: $border-style;
+        border-right: $border-style;
+    }                 
+}
