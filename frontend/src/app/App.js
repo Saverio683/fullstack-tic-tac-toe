@@ -1,11 +1,11 @@
-import { lazy, Suspense } from 'react';
+import { lazy, Suspense} from 'react';
 import { Routes, Route } from 'react-router-dom';
-
 import { GameProvider } from '../contexts/game/game.context';
 
 import './App.scss';
 
 const App = () => {   
+
   const HomePage = lazy(() => import('../pages/home/home.page'))
   const GamePage = lazy(() => import('../pages/game/game.page'))
   const RegisterPage = lazy(() => import('../pages/register/register.page'))

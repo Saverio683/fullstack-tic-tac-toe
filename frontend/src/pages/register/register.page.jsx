@@ -1,8 +1,9 @@
 import { Fragment } from 'react'
 import { useNavigate } from 'react-router'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
+import axios from 'axios'
 
-import { fetchUserData } from '../../redux/user.js'
+import { setUserData } from '../../redux/user.js'
 
 import './register.styles.scss'
 
@@ -10,9 +11,25 @@ const RegisterPage = () => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
 
+    const serializeAndStringify = obj => {
+        const seen = []
+        JSON.stringify(
+            obj,
+            (key, val) => {
+                if(val != null && typeof val === 'object') {
+                    if(seen.indexOf(val) >= 0)
+                       return
+                    seen.push(val)
+                }
+                return val                
+            }
+        )
+        return seen[0]
+    }    
+
     const handleSubmit = event => {
         event.preventDefault()
-        const  { username, email, password } = event.target
+        const { username, email, password } = event.target
         let userData
         let requestUrl = '/auth/'
 
@@ -30,7 +47,12 @@ const RegisterPage = () => {
             }         
             requestUrl += 'login'   
         }
-        dispatch(fetchUserData(requestUrl, userData)())
+        axios.post(requestUrl, serializeAndStringify(userData))
+            .then(({ data }) => {
+                dispatch(setUserData(data))
+            })
+            .then(() => navigate('/', { replace: true }))
+            .catch(err => console.error(err))
     }  
 
     return (

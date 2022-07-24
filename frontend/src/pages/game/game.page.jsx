@@ -9,14 +9,14 @@ import './game.styles.scss';
 
 const GamePage = () => {
     const navigate = useNavigate();
-    const { currentPlayer, setCurrentPlayer, turn, setTurn } = useContext(GameContext);
+    const { currentPlayer, setCurrentPlayer, turn, setTurn } = useContext(GameContext)
 
     const setCurrentPlayerAndTurn = (player, turn) => {
         setCurrentPlayer(player)
         setTurn(turn)
     }
 
-    socket.off('startGame').on('startGame', readyPlayers => {
+    socket.on('startGame', readyPlayers => {
         socket.id === readyPlayers.firstPlayer ?
             setCurrentPlayerAndTurn('X', true)
         :

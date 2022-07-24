@@ -47,11 +47,10 @@ authRouter.get('/success', checkLoggedIn, (req, res) =>
 authRouter.post('/registration', async (req, res) => {
     const { username, email, password } = req.body
     const userCreation = await createNewUser(username, email, password)
-    console.log(userCreation)
     userCreation.error ? //check for errors
         res.status(409).send(userCreation)
     :
-        res.send('User successfully created')
+        res.send(userCreation)
 })
 
 authRouter.post('/login', async (req, res) => {

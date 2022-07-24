@@ -42,6 +42,7 @@ app.use(passport.initialize())
 app.use(passport.session())
 app.use(express.json())
 app.use(helmet()) 
+app.use(cors())
 
 mongoose.connection.once('open', () => {
     console.log('MongoDB connection ready!')
@@ -60,4 +61,4 @@ app.use('/auth', authRouter)
 app.post('/game', async (req, res) => {
     const updatedUser = await updateUserStats('draw', 'Il Puma')
     res.send(updatedUser)
-})
+})     

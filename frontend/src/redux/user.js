@@ -1,5 +1,4 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import axios from 'axios'
+import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = { 
     username: null,
@@ -8,35 +7,8 @@ const initialState = {
     gamesPlayed: null,
     gamesWon: null,
     gamesLost: null,
-    draws: null,
-    loading: false,
-    error: null    
+    draws: null
  }
-
- const serializeAndStringify = obj => {
-    const seen = []
-    JSON.stringify(
-        obj,
-        (key, val) => {
-            if(val != null && typeof val === 'object') {
-                if(seen.indexOf(val) >= 0)
-                   return
-                seen.push(val)
-            }
-            return val                
-        }
-    )
-    return seen[0]
-}
-
-export const fetchUserData = (requestUrl, userData) => 
-    createAsyncThunk(
-        requestUrl,
-        async (payload, { dispatch }) => {
-            console.log('aaaaa', requestUrl)
-            return axios.post(requestUrl, serializeAndStringify(userData))
-        }
-    )
 
 const userSlice = createSlice({
     name: 'user',
@@ -53,24 +25,14 @@ const userSlice = createSlice({
         draw (state) {
             state.gamesPlayed++
             state.draws++
-        }         
-    },
-    extraReducers: {
-        [fetchUserData.pending]: (state, action) => {
-            state.loading = true
         },
-        [fetchUserData.fullFilled]: (state, { payload }) => {
-            state.loading = false
+        setUserData (state, { payload }) {
             state.username = payload.username
             state.email = payload.email
-            state.password = payload.password             
-        },
-        [fetchUserData.rejected]: (state, action) => {
-            state.loading = false
-            state.error = action.payload
-        }
+            state.password = payload.password
+        }   
     }
 })
 
-export const { victory } = userSlice.actions
+export const { setUserData } = userSlice.actions
 export default userSlice.reducer

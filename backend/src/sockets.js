@@ -93,7 +93,7 @@ const listen = io => {
         console.log('a user connected', socket.id)
     
         socket.on('ready', () => {
-            room = Math.floor(readyPlayersCount / 2)
+            room = Math.floor(readyPlayersCount / 2)            
             console.log('Player ready', socket.id, 'room:', room)
     
             readyPlayersCount ++
